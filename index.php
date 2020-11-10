@@ -1,6 +1,4 @@
 <?php
-error_reporting(E_ALL);
-ini_set('display_errors', 'off');
 /**
  * Eingabe
  */
@@ -10,7 +8,7 @@ $phone = '';
 $date = '';
 $time = '';
 $desk = '';
-$isRobot = false;
+$isPrivacy = false;
 $isPostRequest =  $_SERVER['REQUEST_METHOD'] === 'POST';
 $errors =[];
 /**
@@ -23,7 +21,7 @@ if($isPostRequest){
     $date = filter_input(INPUT_POST, 'date');
     $time = filter_input(INPUT_POST, 'time');
     $desk = filter_input(INPUT_POST, 'desk');
-    $isRobot = filter_input(INPUT_POST, 'robot') === 'on';
+    $isPrivacy = filter_input(INPUT_POST, 'privacy') === 'on';
 
     if(!$name){
         $errors[] = 'Name ist leer';
@@ -40,35 +38,26 @@ if($isPostRequest){
     if (!$time) {
         $errors[] = 'Bitte eine Uhrzeit auswählen';
     } }
-        $data = [
-            'Name' => $name,
-            'Adresse' => $adress,
-            'Telefon' => $phone,
-            'Datum' => $date,
-            'Uhrzeit' => $time,
-            'Tisch' => $desk,
-        ];
 
-
-            $pdo = new PDO('mysql:host=127.0.0.1;dbname=guest', 'guest', 'password');
+        $pdo = new PDO('mysql:host=localhost;dbname=guest', 'guest', '123456');
             $statement = $pdo->prepare("INSERT INTO guest (name, adress, phone, date, time, desk) VALUES (?, ?, ?, ?, ?, ?)");
             $statement->execute(array($_POST['name'],$_POST['adress'],$_POST['phone'],$_POST['date'],$_POST['time'],$_POST['desk']));
 
         $_POST = [];
-        $mrIsSelected = false;
-        $mrsIsSelected = false;
-        $subject = null;
-        $isRobot = false;
-        $name = '';
-        $message = '';
-
-
+            $name = '';
+            $adress = '';
+            $phone = '';
+            $date = '';
+            $time = '';
+            $desk = '';
+            $isPrivacy = false;
 
 /**
  * Ausgabe
  */
 ?>
 <!DOCTYPE html>
+<!--Dieses Werk ist realisiert, und geschrieben von Lukas Dallhammer (www.github.com/lukas-dallhammer)-->
 <html lang="de">
 <head>
     <title>COVID-19 GÄSTEREGISTRIERUNG</title>
@@ -79,7 +68,7 @@ if($isPostRequest){
 <header class="jumbotron">
     <div class="container">
       <h1 class="display-4">COVID-19 GÄSTEREGISTRIERUNG</h1>
-      <p class="lead">Aufgrund der Aktuellen Corona Schutzmaßnahmen ist es notwendig Ihre daten zu erfassen</p>
+      <p class="lead">Aufgrund der Aktuellen Corona Schutzmaßnahmen ist es notwendig Ihre Daten zu erfassen</p>
     </div>
 </header>
 <?php if($isPostRequest):?>
@@ -165,8 +154,8 @@ if($isPostRequest){
                     </div
                 <div class="row form-check">
                     <div class="offset-2 col">
-                        <input type="checkbox" name="robot" id="robot" class="form-check-input"<?= $isRobot ? ' checked' : '' ?>
-                        <label for="robot" class="form-check-label">Hiermit bestätige ich, dass ich mit der angegebenen <a href="#">Datenschutzerklärung</a> einverstanden bin.</label>
+                        <input type="checkbox" name="privacy" id="privacy" class="form-check-input"<?= $isPrivacy ? ' checked' : '' ?>>
+                        <label for="privacy" class="form-check-label">Hiermit bestätige ich, dass ich mit der angegebenen <a href="#">Datenschutzerklärung</a> einverstanden bin.</label>
                     </div>
                 </div>
         </div>
@@ -175,11 +164,6 @@ if($isPostRequest){
         </div>
         </form>
     </div>
-    <!--ANFANG    !ACHTUNG DIESER TEIL MUSS IM QUELLCODE BLEIBEN, ANSONSTEN WIRD DIE LIZENZVEREINBARUNG, LAUT GITHUB NICHT EINGEHELTEN!-->
-    <div class="footer fixed-bottom">
-        by Lukas Dallhammer <a href="https://github.com/lukas-dallhammer">Github</a>
-    </div>
-    <!--ENDE      !ACHTUNG DIESER TEIL MUSS IM QUELLCODE BLEIBEN, ANSONSTEN WIRD DIE LIZENZVEREINBARUNG, LAUT GITHUB NICHT EINGEHELTEN!-->
 </section>
 </body>
 </html>
