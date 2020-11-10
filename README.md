@@ -13,7 +13,7 @@ Um das System reibungslos verwenden zu können folgen Sie diesen Anweisungen:
 
 1. Bringen Sie alle Daten via FTP, oder andere Verfahren auf Ihre Server
 2. Führen Sie die install.sql aus, es wird eine Tabelle 'guest' erstellt mit den Spalten 'id','name','adress','phone','date','time','desk' angelegt.
-3. Erstellen Sie den Zugang mit dem Benutzernamen welcher in der 'index.php', Zeile 51 konfiguriert werden, diesem User geben Sie auf diese Tabelle alle Rechte.
+3. Erstellen Sie den Zugang mit dem Benutzernamen welcher in der 'index.php', Zeile 42 konfiguriert werden, diesem User geben Sie auf diese Tabelle alle Rechte.
 
 DIE GEWONNENEN DATEN KÖNNEN SIE IM ANSCHLUSS DER ÖRTLICHEN AUFSICHTSBEHÖRDE ODER DER GESUNDHEITSBEHÖRDE ÜBERGEBEN
 
