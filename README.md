@@ -5,7 +5,7 @@ Das System ist für Unternehmen entwickelt, welche (z.b. in Österreich) eine Pf
 
 # Voraussetzung
 - Webserver (kein Root zugriff benötigt)
-- PHP 7.4.x
+- PHP 7.x
 - Datenbank
 - phpMyAdmin (um die Auswertung durch Virtualisierung zu erleichtern)
 # Installation
